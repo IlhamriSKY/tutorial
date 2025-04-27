@@ -3,7 +3,7 @@ Tutorial Menjalankan Program Laboratory Supply Tracking Notification System
 
 1.  *Buka Command Prompt (CMD)*
     -Tekan `Windows + R`, ketik `cmd`, lalu tekan Enter.
-2.  *Pindah ke drive D*
+2.  *Pindah ke drive D ketikan di CMD*
     
         D:
     
