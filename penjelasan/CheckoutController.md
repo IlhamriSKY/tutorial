@@ -29,7 +29,7 @@
 
 ### 🔧 Function: `store(CheckoutRequest $request)`
 
-```
+```php
 $checkout = (new PrepareOrder(...))->process()->save();
 event(new CheckoutEvent($checkout, 'created'));
 dispatch(new SendOrderNotifications($checkout, 'checkout'));
@@ -71,7 +71,7 @@ dispatch(new SendOrderNotifications($checkout, 'checkout'));
 
 #### 💡 SQL Setara:
 
-```
+```sql
 UPDATE checkouts SET deleted_at = NOW() WHERE id = 2;
 ```
 
@@ -97,8 +97,7 @@ DELETE FROM checkouts WHERE id = 2;
 
 #### 💡 SQL Setara:
 
-```
-
+```sql
 UPDATE checkouts SET deleted_at = NULL WHERE id = 2;
 UPDATE checkout_items SET deleted_at = NULL WHERE checkout_id = 2;
 ```

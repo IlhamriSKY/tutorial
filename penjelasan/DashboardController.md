@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $this->form($request);
@@ -44,7 +44,7 @@ public function index(Request $request)
 
 #### 💡 Contoh Query SQL (disederhanakan):
 
-```
+```sql
 SELECT
   COUNT(*) as items,
   (SELECT COUNT(*) FROM checkins WHERE date BETWEEN '2025-05-01' AND '2025-05-31') as checkins,
@@ -64,7 +64,7 @@ LIMIT 1;
 
 ### 🔧 Function: `activity(Request $request)`
 
-```
+```php
 public function activity(Request $request)
 {
     $authUser = Auth::user()->load('roles');
@@ -102,7 +102,7 @@ public function activity(Request $request)
 
 ### 🔧 Function: `form(Request $request)`
 
-```
+```php
 public function form(Request $request)
 {
     return $request->validate([

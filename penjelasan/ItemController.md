@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $filters = $request->only(['search', 'trashed', 'category']);
@@ -56,7 +56,7 @@ public function index(Request $request)
 
 ### 🔧 Function: `store(ItemRequest $request)`
 
-```
+```php
 public function store(ItemRequest $request)
 {
     $data = $request->validated();
@@ -72,7 +72,7 @@ public function store(ItemRequest $request)
 
 #### 💡 Contoh SQL:
 
-```
+```sql
 INSERT INTO items (name, code, unit_id, created_at, updated_at)
 VALUES ('Beras', 'BR001', 2, NOW(), NOW());
 ```
@@ -91,7 +91,7 @@ VALUES ('Beras', 'BR001', 2, NOW(), NOW());
 
 ### 🔧 Function: `update(ItemRequest $request, Item $item)`
 
-```
+```php
 public function update(ItemRequest $request, Item $item)
 {
     $data = $request->validated();
@@ -126,7 +126,7 @@ public function update(ItemRequest $request, Item $item)
 
 #### 💡 Query SQL:
 
-```
+```sql
 UPDATE items SET deleted_at = NOW() WHERE id = 1;
 ```
 
@@ -138,7 +138,7 @@ UPDATE items SET deleted_at = NOW() WHERE id = 1;
 
 #### 💡 Query SQL:
 
-```
+```sql
 DELETE FROM items WHERE id = 1;
 ```
 
@@ -146,7 +146,7 @@ DELETE FROM items WHERE id = 1;
 
 ### 🔧 Function: `destroyPhoto(Item $item)`
 
-```
+```php
 public function destroyPhoto(Item $item)
 {
     if (FileStorage::disk('assets')->delete($item->photo)) {
@@ -171,7 +171,7 @@ public function destroyPhoto(Item $item)
 
 #### 💡 Query SQL:
 
-```
+```sql
 UPDATE items SET deleted_at = NULL WHERE id = 1;
 ```
 
@@ -179,7 +179,7 @@ UPDATE items SET deleted_at = NULL WHERE id = 1;
 
 ### 🔧 Function: `trail(Item $item)`
 
-```
+```php
 public function trail(Item $item)
 {
     $item->load('stockTrails');

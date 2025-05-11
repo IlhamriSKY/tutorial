@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `store(CategoryRequest $request)`
 
-```
+```php
 public function store(CategoryRequest $request)
 {
     Category::create($request->validated());
@@ -25,7 +25,7 @@ public function store(CategoryRequest $request)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 INSERT INTO categories (name, code, parent_id, created_at, updated_at)
 VALUES ('Nama Kategori', 'KT001', 1, NOW(), NOW());
 ```
@@ -34,7 +34,7 @@ VALUES ('Nama Kategori', 'KT001', 1, NOW(), NOW());
 
 ### 🔧 Function: `update(CategoryRequest $request, Category $category)`
 
-```
+```php
 public function update(CategoryRequest $request, Category $category)
 {
     $category->update($request->validated());
@@ -49,7 +49,7 @@ public function update(CategoryRequest $request, Category $category)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE categories
 SET name = 'Kategori Baru', code = 'KT002', parent_id = 2, updated_at = NOW()
 WHERE id = 5;
@@ -59,7 +59,7 @@ WHERE id = 5;
 
 ### 🔧 Function: `destroy(Category $category)`
 
-```
+```php
 public function destroy(Category $category)
 {
     if ($category->del()) {
@@ -77,7 +77,7 @@ public function destroy(Category $category)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE categories
 SET deleted_at = NOW()
 WHERE id = 5;
@@ -87,7 +87,7 @@ WHERE id = 5;
 
 ### 🔧 Function: `destroyPermanently(Category $category)`
 
-```
+```php
 public function destroyPermanently(Category $category)
 {
     if ($category->delP()) {
@@ -105,7 +105,7 @@ public function destroyPermanently(Category $category)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 DELETE FROM categories WHERE id = 5;
 ```
 
@@ -113,7 +113,7 @@ DELETE FROM categories WHERE id = 5;
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $filters = $request->all('search', 'parent', 'trashed');
@@ -140,7 +140,7 @@ public function index(Request $request)
 
 #### 💡 Contoh SQL Query jika search = 'elektronik'
 
-```
+```sql
 SELECT categories.*, parents.name as parent_name
 FROM categories
 LEFT JOIN categories AS parents ON categories.parent_id = parents.id
@@ -157,7 +157,7 @@ LIMIT 10 OFFSET 0;
 
 ### 🔧 Function: `create()`
 
-```
+```php
 public function create()
 {
     return Inertia::render('Category/Form', [
@@ -172,7 +172,7 @@ public function create()
 
 #### 💡 Query SQL (ambil kategori induk):
 
-```
+```sql
 SELECT * FROM categories WHERE parent_id IS NULL;
 ```
 
@@ -184,7 +184,7 @@ SELECT * FROM categories WHERE parent_id IS NULL;
 
 ### 🔧 Function: `edit(Category $category)`
 
-```
+```php
 public function edit(Category $category)
 {
     return Inertia::render('Category/Form', [

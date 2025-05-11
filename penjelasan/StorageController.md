@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $filters = $request->all('search', 'trashed');
@@ -29,7 +29,7 @@ public function index(Request $request)
 
 #### 💡 Contoh Query SQL:
 
-```
+```sql
 SELECT * FROM storages
 WHERE name LIKE '%gudang%'
 ORDER BY id DESC
@@ -44,7 +44,7 @@ LIMIT 10 OFFSET 0;
 
 ### 🔧 Function: `create()`
 
-```
+```php
 public function create()
 {
     return Inertia::render('Storage/Form');
@@ -63,7 +63,7 @@ public function create()
 
 ### 🔧 Function: `store(StorageRequest $request)`
 
-```
+```php
 public function store(StorageRequest $request)
 {
     Storage::create($request->validated());
@@ -80,7 +80,7 @@ public function store(StorageRequest $request)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 INSERT INTO storages (name, code, location, created_at, updated_at)
 VALUES ('Gudang A', 'GDG-A', 'Jakarta', NOW(), NOW());
 ```
@@ -89,7 +89,7 @@ VALUES ('Gudang A', 'GDG-A', 'Jakarta', NOW(), NOW());
 
 ### 🔧 Function: `edit(Storage $storage)`
 
-```
+```php
 public function edit(Storage $storage)
 {
     return Inertia::render('Storage/Form', [
@@ -111,7 +111,7 @@ public function edit(Storage $storage)
 
 ### 🔧 Function: `update(StorageRequest $request, Storage $storage)`
 
-```
+```php
 public function update(StorageRequest $request, Storage $storage)
 {
     $storage->update($request->validated());
@@ -126,7 +126,7 @@ public function update(StorageRequest $request, Storage $storage)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE storages
 SET name = 'Gudang B', location = 'Bandung', updated_at = NOW()
 WHERE id = 3;
@@ -136,7 +136,7 @@ WHERE id = 3;
 
 ### 🔧 Function: `destroy(Storage $storage)`
 
-```
+```php
 public function destroy(Storage $storage)
 {
     if ($storage->del()) {
@@ -155,7 +155,7 @@ public function destroy(Storage $storage)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE storages
 SET deleted_at = NOW()
 WHERE id = 3;
@@ -165,7 +165,7 @@ WHERE id = 3;
 
 ### 🔧 Function: `destroyPermanently(Storage $storage)`
 
-```
+```php
 public function destroyPermanently(Storage $storage)
 {
     if ($storage->delP()) {
@@ -183,7 +183,7 @@ public function destroyPermanently(Storage $storage)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 DELETE FROM storages
 WHERE id = 3;
 ```
@@ -192,7 +192,7 @@ WHERE id = 3;
 
 ### 🔧 Function: `restore(Storage $storage)`
 
-```
+```php
 public function restore(Storage $storage)
 {
     $storage->restore();
@@ -207,7 +207,7 @@ public function restore(Storage $storage)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE storages
 SET deleted_at = NULL
 WHERE id = 3;

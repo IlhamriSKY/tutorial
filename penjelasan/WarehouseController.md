@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $filters = $request->all('search', 'trashed');
@@ -30,7 +30,7 @@ public function index(Request $request)
 
 #### 💡 Contoh SQL Query (search = "pusat"):
 
-```
+```sql
 SELECT * FROM warehouses
 WHERE name LIKE '%pusat%'
 ORDER BY id DESC
@@ -45,7 +45,7 @@ LIMIT 10 OFFSET 0;
 
 ### 🔧 Function: `create()`
 
-```
+```php
 public function create()
 {
     return Inertia::render('Warehouse/Form');
@@ -64,7 +64,7 @@ public function create()
 
 ### 🔧 Function: `store(WarehouseRequest $request)`
 
-```
+```php
 public function store(WarehouseRequest $request)
 {
     Warehouse::create($request->validated());
@@ -81,7 +81,7 @@ public function store(WarehouseRequest $request)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 INSERT INTO warehouses (name, code, address, created_at, updated_at)
 VALUES ('Gudang Pusat', 'GD-PST', 'Jl. Raya 1', NOW(), NOW());
 ```
@@ -90,7 +90,7 @@ VALUES ('Gudang Pusat', 'GD-PST', 'Jl. Raya 1', NOW(), NOW());
 
 ### 🔧 Function: `edit(Warehouse $warehouse)`
 
-```
+```php
 public function edit(Warehouse $warehouse)
 {
     return Inertia::render('Warehouse/Form', [
@@ -112,7 +112,7 @@ public function edit(Warehouse $warehouse)
 
 ### 🔧 Function: `update(WarehouseRequest $request, Warehouse $warehouse)`
 
-```
+```php
 public function update(WarehouseRequest $request, Warehouse $warehouse)
 {
     $warehouse->update($request->validated());
@@ -127,7 +127,7 @@ public function update(WarehouseRequest $request, Warehouse $warehouse)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE warehouses
 SET name = 'Gudang Cabang', address = 'Jl. Baru 2', updated_at = NOW()
 WHERE id = 7;
@@ -137,7 +137,7 @@ WHERE id = 7;
 
 ### 🔧 Function: `destroy(Warehouse $warehouse)`
 
-```
+```php
 public function destroy(Warehouse $warehouse)
 {
     if ($warehouse->del()) {
@@ -156,7 +156,7 @@ public function destroy(Warehouse $warehouse)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE warehouses
 SET deleted_at = NOW()
 WHERE id = 7;
@@ -166,7 +166,7 @@ WHERE id = 7;
 
 ### 🔧 Function: `destroyPermanently(Warehouse $warehouse)`
 
-```
+```php
 public function destroyPermanently(Warehouse $warehouse)
 {
     if ($warehouse->delP()) {
@@ -185,7 +185,7 @@ public function destroyPermanently(Warehouse $warehouse)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 DELETE FROM warehouses
 WHERE id = 7;
 ```
@@ -194,7 +194,7 @@ WHERE id = 7;
 
 ### 🔧 Function: `restore(Warehouse $warehouse)`
 
-```
+```php
 public function restore(Warehouse $warehouse)
 {
     $warehouse->restore();
@@ -211,7 +211,7 @@ public function restore(Warehouse $warehouse)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE warehouses SET deleted_at = NULL WHERE id = 7;
 UPDATE stocks SET deleted_at = NULL WHERE warehouse_id = 7;
 ```

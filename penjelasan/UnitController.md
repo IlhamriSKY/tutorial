@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `store(UnitRequest $request)`
 
-```
+```php
 public function store(UnitRequest $request)
 {
     Unit::create($request->validated());
@@ -25,7 +25,7 @@ public function store(UnitRequest $request)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 INSERT INTO units (name, code, base_unit_id, created_at, updated_at)
 VALUES ('Kilogram', 'KG', NULL, NOW(), NOW());
 ```
@@ -34,7 +34,7 @@ VALUES ('Kilogram', 'KG', NULL, NOW(), NOW());
 
 ### 🔧 Function: `update(UnitRequest $request, Unit $unit)`
 
-```
+```php
 public function update(UnitRequest $request, Unit $unit)
 {
     $unit->update($request->validated());
@@ -49,7 +49,7 @@ public function update(UnitRequest $request, Unit $unit)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE units
 SET name = 'Gram', code = 'GR', base_unit_id = 1, updated_at = NOW()
 WHERE id = 4;
@@ -59,7 +59,7 @@ WHERE id = 4;
 
 ### 🔧 Function: `destroy(Unit $unit)`
 
-```
+```php
 public function destroy(Unit $unit)
 {
     if ($unit->del()) {
@@ -77,7 +77,7 @@ public function destroy(Unit $unit)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE units
 SET deleted_at = NOW()
 WHERE id = 4;
@@ -87,7 +87,7 @@ WHERE id = 4;
 
 ### 🔧 Function: `destroyPermanently(Unit $unit)`
 
-```
+```php
 public function destroyPermanently(Unit $unit)
 {
     if ($unit->delP()) {
@@ -105,7 +105,7 @@ public function destroyPermanently(Unit $unit)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 DELETE FROM units WHERE id = 4;
 ```
 
@@ -113,7 +113,7 @@ DELETE FROM units WHERE id = 4;
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $filters = $request->all('search', 'trashed');
@@ -137,7 +137,7 @@ public function index(Request $request)
 
 #### 💡 Contoh SQL jika search = 'gram':
 
-```
+```sql
 SELECT * FROM units
 WHERE name LIKE '%gram%'
 ORDER BY id DESC
@@ -152,7 +152,7 @@ LIMIT 10 OFFSET 0;
 
 ### 🔧 Function: `create()`
 
-```
+```php
 public function create()
 {
     return Inertia::render('Unit/Form', [
@@ -168,7 +168,7 @@ public function create()
 
 #### 💡 Query SQL setara (unit dasar):
 
-```
+```sql
 SELECT * FROM units WHERE base_unit_id IS NULL;
 ```
 
@@ -180,6 +180,6 @@ SELECT * FROM units WHERE base_unit_id IS NULL;
 
 ### 🔧 Function: `edit(Unit $unit)`
 
-```
+```php
 public function edit
 ```

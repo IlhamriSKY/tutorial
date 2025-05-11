@@ -29,8 +29,7 @@
 
 ### 🔧 Function: `store(CheckinRequest $request)`
 
-```
-
+```php
 $checkin = (new PrepareOrder(...))->process()->save();
 event(new \App\Events\CheckinEvent($checkin, 'created'));
 ```
@@ -71,7 +70,7 @@ event(new \App\Events\CheckinEvent($checkin, 'created'));
 
 #### 💡 Query SQL:
 
-```
+```sql
 UPDATE checkins SET deleted_at = NOW() WHERE id = 1;
 ```
 
@@ -84,7 +83,7 @@ UPDATE checkins SET deleted_at = NOW() WHERE id = 1;
 
 #### 💡 Query SQL:
 
-```
+```sql
 DELETE FROM checkins WHERE id = 1;
 ```
 
@@ -97,7 +96,7 @@ DELETE FROM checkins WHERE id = 1;
 
 #### 💡 Query SQL:
 
-```
+```sql
 UPDATE checkins SET deleted_at = NULL WHERE id = 1;
 UPDATE checkin_items SET deleted_at = NULL WHERE checkin_id = 1;
 ```

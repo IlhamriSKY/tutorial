@@ -8,7 +8,7 @@
 
 ### 🔧 Function: `index(Request $request)`
 
-```
+```php
 public function index(Request $request)
 {
     $filters = $request->only('search', 'role', 'trashed');
@@ -40,7 +40,7 @@ public function index(Request $request)
 
 #### 💡 Contoh Query SQL (jika Role ID 3 dan filter 'admin'):
 
-```
+```sql
 SELECT * FROM users
 WHERE warehouse_id = 2 AND name LIKE '%admin%'
 ORDER BY name ASC
@@ -55,7 +55,7 @@ LIMIT 10 OFFSET 0;
 
 ### 🔧 Function: `create()`
 
-```
+```php
 public function create()
 {
     $user = Auth::user()->load('roles');
@@ -89,7 +89,7 @@ public function create()
 
 ### 🔧 Function: `store(UserRequest $request)`
 
-```
+```php
 public function store(UserRequest $request)
 {
     $user = User::create($request->validated());
@@ -106,7 +106,7 @@ public function store(UserRequest $request)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 INSERT INTO users (name, email, password, warehouse_id, created_at, updated_at)
 VALUES ('Admin', 'admin@example.com', 'hashedpass', 1, NOW(), NOW());
 
@@ -118,7 +118,7 @@ VALUES (2, 5, 'App\\Models\\User');
 
 ### 🔧 Function: `edit(User $user)`
 
-```
+```php
 public function edit(User $user)
 {
     $user->load('roles');
@@ -153,7 +153,7 @@ public function edit(User $user)
 
 ### 🔧 Function: `update(UserRequest $request, User $user)`
 
-```
+```php
 public function update(UserRequest $request, User $user)
 {
     if ($user->id == auth()->id()) {
@@ -178,7 +178,7 @@ public function update(UserRequest $request, User $user)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE users
 SET name = 'New Name', email = 'new@example.com', updated_at = NOW()
 WHERE id = 5;
@@ -191,7 +191,7 @@ INSERT INTO model_has_roles (role_id, model_id, model_type) VALUES (...);
 
 ### 🔧 Function: `destroy(User $user)`
 
-```
+```php
 public function destroy(User $user)
 {
     if ($user->id == auth()->id()) {
@@ -214,7 +214,7 @@ public function destroy(User $user)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE users SET deleted_at = NOW() WHERE id = 5;
 ```
 
@@ -222,7 +222,7 @@ UPDATE users SET deleted_at = NOW() WHERE id = 5;
 
 ### 🔧 Function: `destroyPermanently(User $user)`
 
-```
+```php
 public function destroyPermanently(User $user)
 {
     if ($user->id == auth()->id()) {
@@ -244,7 +244,7 @@ public function destroyPermanently(User $user)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 DELETE FROM users WHERE id = 5;
 ```
 
@@ -252,7 +252,7 @@ DELETE FROM users WHERE id = 5;
 
 ### 🔧 Function: `restore(User $user)`
 
-```
+```php
 public function restore(User $user)
 {
     $user->restore();
@@ -267,7 +267,7 @@ public function restore(User $user)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE users SET deleted_at = NULL WHERE id = 5;
 ```
 
@@ -275,7 +275,7 @@ UPDATE users SET deleted_at = NULL WHERE id = 5;
 
 ### 🔧 Function: `disable2FA(User $user)`
 
-```
+```php
 public function disable2FA(User $user)
 {
     $user->forceFill(['two_factor_secret' => null, 'two_factor_recovery_codes' => null])->save();
@@ -290,7 +290,7 @@ public function disable2FA(User $user)
 
 #### 💡 Query SQL setara:
 
-```
+```sql
 UPDATE users
 SET two_factor_secret = NULL, two_factor_recovery_codes = NULL, updated_at = NOW()
 WHERE id = 5;
